@@ -3,36 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fadesewa - Full Stack Developer</title>
+    <title>Fadesewa | Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.5rem; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
 
         /* Header */
         header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
             padding: 1rem 0;
         }
 
@@ -43,145 +127,223 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
-            color: white;
+            color: var(--dark);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:hover {
-            color: #ffd700;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
         }
 
-        /* Hero Section */
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero */
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            background: linear-gradient(135deg, #f0f7ff 0%, #fdf2ff 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content h1 {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="%232563eb" opacity="0.03"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
             margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #ffd700;
-            color: #333;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease 0.4s both;
+        .hero-highlight {
+            color: var(--primary);
+            font-weight: 600;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        /* Sections */
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: white;
-        }
-
-        /* About Section */
+        /* About */
         .about {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: white;
         }
 
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
         }
 
-        .about-text {
-            color: white;
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
             font-size: 1.1rem;
         }
 
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .skills-container {
             margin-top: 2rem;
         }
 
-        .skill-tag {
-            background: rgba(255, 215, 0, 0.2);
-            color: #ffd700;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #ffd700;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        /* Projects Section */
+        .skill-item {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects */
         .projects {
-            background: rgba(0, 0, 0, 0.1);
+            background: #f8fafc;
+        }
+
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .project-card h3 {
-            color: #ffd700;
-            font-size: 1.4rem;
+        .project-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
         }
 
-        .project-card p {
-            color: white;
+        .project-description {
+            color: var(--gray);
             margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .tech-stack {
@@ -192,11 +354,12 @@
         }
 
         .tech-tag {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .project-links {
@@ -204,96 +367,160 @@
             gap: 1rem;
         }
 
-        .project-link {
-            color: #ffd700;
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 1px solid #ffd700;
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .project-link:hover {
-            background: #ffd700;
-            color: #333;
-        }
-
-        /* Contact Section */
+        /* Contact */
         .contact {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: white;
         }
 
         .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
             text-align: center;
         }
 
+        .contact-description {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
         .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .contact-item {
-            color: white;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
             text-decoration: none;
-            padding: 1rem 2rem;
-            background: rgba(255, 215, 0, 0.2);
-            border-radius: 10px;
-            transition: background 0.3s;
+            color: var(--dark);
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
         }
 
         .contact-item:hover {
-            background: rgba(255, 215, 0, 0.3);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.3);
-            text-align: center;
-            padding: 2rem 0;
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
             color: white;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            text-align: center;
+            width: 100%;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
             }
 
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
             }
 
-            .contact-info {
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: flex-start;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            section {
+                padding: 4rem 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <nav class="container">
             <div class="logo">Fadesewa.dev</div>
@@ -303,176 +530,337 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
-    <main>
-        <section id="home" class="hero">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
             <div class="hero-content">
-                <h1>Hi, I'm Fadesewa</h1>
-                <p>Software Developer | JavaScript & PHP </p>
-                <a href="#projects" class="cta-button">View My Work</a>
+                <h1>Software Engineer & Full Stack Developer</h1>
+                <p class="hero-subtitle">
+                    I build <span class="hero-highlight">scalable web applications</span> with modern technologies. 
+                    Specializing in JavaScript, PHP, and TypeScript ecosystems.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i> View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <i class="fas fa-paper-plane"></i> Get In Touch
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I'm a passionate software developer with expertise in JavaScript and PHP. I love building complex web applications that solve real-world problems. From school management systems to interactive games, I enjoy creating software that makes a difference.</p>
-                        <p>My experience spans frontend development with modern JavaScript, backend development with PHP, and database design with MySQL. I'm always eager to learn new technologies and take on challenging projects.</p>
-                        <div class="skills">
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">PHP</span>
-                            <span class="skill-tag">MySQL</span>
-                            <span class="skill-tag">HTML5</span>
-                            <span class="skill-tag">CSS3</span>
-                            <span class="skill-tag">WordPress</span>
-                            <span class="skill-tag">API Integration</span>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a dedicated software engineer with over 3 years of experience building full-stack applications. 
+                        My expertise spans both frontend and backend development, with a focus on creating efficient, 
+                        scalable solutions that deliver exceptional user experiences.
+                    </p>
+                    <p>
+                        I'm passionate about clean code, software architecture, and staying current with emerging technologies. 
+                        My approach combines technical excellence with business understanding to deliver optimal results.
+                    </p>
+                    <div class="skills-container">
+                        <h3>Technical Expertise</h3>
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript/TypeScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-php"></i>
+                                <span>PHP & Laravel</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-database"></i>
+                                <span>MySQL & Supabase</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fab fa-react"></i>
+                                <span>React Ecosystem</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-server"></i>
+                                <span>API Development</span>
+                            </div>
+                            <div class="skill-item">
+                                <i class="fas fa-cloud"></i>
+                                <span>Cloud Architecture</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="projects" class="projects">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>🏫 School Management System</h3>
-                        <p>Comprehensive school management platform with 12 interconnected database tables handling student records, academic sessions, fee management, and administrative functions. Features separate dashboards for different user roles.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Allfave Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-store"></i> Allfave - E-commerce Platform
+                        </h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">
+                            Full-stack affiliate marketing platform built with modern technologies. 
+                            Features include user authentication, admin dashboard, product management, 
+                            wishlist, blog system, and automated email notifications.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">shadcn/ui</span>
+                            <span class="tech-tag">Resend</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Fadesewa-dev/allfave" class="btn btn-outline" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Management System -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-school"></i> School Management System
+                        </h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">
+                            Comprehensive school administration platform with 12 interconnected database tables. 
+                            Manages student records, academic sessions, fees, and provides role-based dashboards.
+                        </p>
                         <div class="tech-stack">
                             <span class="tech-tag">PHP</span>
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Bootstrap</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Live Demo</a>
-            <a href="https://github.com/Fadesewa-dev/school-management-system" class="project-link">Source Code</a>
+                            <a href="https://github.com/Fadesewa-dev/school-management-system" class="btn btn-outline" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    <div class="project-card">
-                        <h3>📱 MTN USSD Simulator</h3>
-                        <p>Interactive USSD system simulator replicating mobile network services. Built with custom logic to handle various USSD codes and user interactions, demonstrating understanding of telecom systems.</p>
+                <!-- MTN USSD Simulator -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-mobile-alt"></i> MTN USSD Simulator
+                        </h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">
+                            Interactive USSD system simulator replicating telecom services. 
+                            Implements custom logic for handling various USSD codes and user interactions.
+                        </p>
                         <div class="tech-stack">
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">PHP</span>
                             <span class="tech-tag">Session Management</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Live Demo</a>
-                           <a href="https://github.com/Fadesewa-dev/mtn-ussd-simulator" class="project-link">Source Code</a>
+                            <a href="https://github.com/Fadesewa-dev/mtn-ussd-simulator" class="btn btn-outline" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    
-
-                    <div class="project-card">
-                        <h3>💱 Currency Converter</h3>
-                        <p>Real-time currency conversion application with live exchange rates. Features clean interface and API integration for up-to-date financial data.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">JSON</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Live Demo</a>
-                            <a href="https://github.com/Fadesewa-dev/currency-converter" class="project-link">Source Code</a>
-                        </div>
+                <!-- Restaurant E-commerce -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-utensils"></i> Restaurant E-commerce Platform
+                        </h3>
                     </div>
-
-                    <div class="project-card">
-                        <h3>🎨 Color Mixer Application</h3>
-                        <p>Creative tool for mixing and exploring colors with interactive controls. Demonstrates DOM manipulation and visual programming concepts.</p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">Color Theory</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Try It</a>
-                           <a href="https://github.com/Fadesewa-dev/color-mixer" class="project-link">Source Code</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <h3>🍽️ Restaurant Ecommerce Platform</h3>
-                        <p>                         
-Fully custom restaurant ordering system built from scratch with HTML and CSS, integrated with WooCommerce for ecommerce functionality. Features custom menu design, shopping cart, and seamless checkout experience.</p>
+                    <div class="project-body">
+                        <p class="project-description">
+                            Custom restaurant ordering system with WooCommerce integration. 
+                            Features menu management, shopping cart, and seamless checkout experience.
+                        </p>
                         <div class="tech-stack">
                             <span class="tech-tag">HTML</span>
                             <span class="tech-tag">CSS</span>
                             <span class="tech-tag">WooCommerce</span>
-    
+                            <span class="tech-tag">WordPress</span>
                         </div>
                         <div class="project-links">
-                           <a href="https://abokiysuya.com/?i=1" class="project-link">Visit Site</a>
-                           <a href="https://abokiysuya.com/?i=1" class="project-link">Learn More</a>
+                            <a href="https://abokiysuya.com/?i=1" class="btn btn-primary" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Visit Site
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Currency Converter -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-exchange-alt"></i> Currency Converter
+                        </h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-description">
+                            Real-time currency conversion application with live exchange rates via API integration. 
+                            Clean interface with up-to-date financial data.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">JSON</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Fadesewa-dev/currency-converter" class="btn btn-outline" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2 class="section-title">Let's Work Together</h2>
-                <div class="contact-content">
-                    <p style="color: white; font-size: 1.2rem; margin-bottom: 2rem;">
-                        I'm always interested in new opportunities and exciting projects. Let's connect!
-                    </p>
-                    <div class="contact-info">
-                        <a href="mailto:your.fadebus@yahoo.com" class="contact-item">
-                            📧 Email Me
-                        </a>
-                        <a href="https://github.com/Fadesewa-dev" class="contact-item">
-                            🔗 GitHub
-                        </a>
-                        <a href="https://www.linkedin.com/in/busayo-fadesewa-ab9a64ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="contact-item">
-                            💼 LinkedIn
-                        </a>
-                    </div>
-                </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-description">
+                Interested in collaborating or have a project in mind? 
+                I'm always open to discussing new opportunities and challenges.
+            </p>
+            
+            <div class="contact-info">
+                <a href="mailto:your.fadebus@yahoo.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p>your.fadebus@yahoo.com</p>
+                </a>
+                
+                <a href="https://github.com/Fadesewa-dev" class="contact-item" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <p>@Fadesewa-dev</p>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/busayo-fadesewa-ab9a64ab" class="contact-item" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <p>Busayo Fadesewa</p>
+                </a>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Fadesewa. Built with passion and code. ❤️</p>
+            <div class="footer-content">
+                <div class="logo">Fadesewa.dev</div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <p class="copyright">
+                &copy; 2024 Fadesewa. All rights reserved. Built with passion and precision.
+            </p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
 
-        // Add scroll effect to header
+        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.9)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
             }
         });
 
-        // Animate project cards on scroll
+        // Project filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -481,21 +869,19 @@ Fully custom restaurant ordering system built from scratch with HTML and CSS, in
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
+        // Observe project cards for animation
         document.querySelectorAll('.project-card').forEach(card => {
             card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(card);
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
